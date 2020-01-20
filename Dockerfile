@@ -1,20 +1,13 @@
-FROM node:carbon
+FROM node
 
+WORKDIR /app
+COPY swagger-tracking.json swagger-tracking.json
 
-# Create app directory
-WORKDIR /usr/src/app
+# If you have native dependencies, you'll need extra tools
+# RUN apk add --no-cache make gcc g++ python
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+RUN npm install -g @stoplight/prism-cli
 
-RUN npm install
-# If you are building your code for production
-# RUN npm install --only=production
+EXPOSE 4010
 
-# Bundle app source
-COPY . .
-
-EXPOSE 8080
-CMD [ "npm", "start" ]
+CMD ["prism", "mock", "-h", "0.0.0.0", "swagger-tracking.json"]

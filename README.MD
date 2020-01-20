@@ -1,3 +1,5 @@
-# Welcome to building a container image and deploying to AWS using Codepipelines
+# Prism
 
-This is some interesting text.
+This implements a Prism mocking server based on a swagger file in a Docker Container.
+
+See https://github.com/stoplightio/prism
